@@ -13,6 +13,7 @@ function App() {
 
   return (
     <div>
+      <WelcomeMessage />
       <Header />
       
       {/* Adding the new UserProfile component with props */}
