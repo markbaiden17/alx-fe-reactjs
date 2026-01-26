@@ -1,0 +1,43 @@
+body {
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background-color: antiquewhite;
+}
+
+#root {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    text-align: center;
+}
+
+nav {
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    color: #333;
+    margin-top: 2rem;
+}
+
+footer {
+    margin-top: 3rem;
+    color: #666;
+    font-size: 0.9rem;
+}
