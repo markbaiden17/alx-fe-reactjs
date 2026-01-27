@@ -37,7 +37,7 @@ const Search = () => {
             </form>
 
             {loading && <p>Loading...</p>}
-            {error && <p>Sorry, the user was not found.</p>}
+            {error && <p>Looks like we cant find the user</p>}
 
             {userData && (
                 <div style={{ marginTop: '20px', border: '1px solid #ddd', padding: '20px', borderRadius: '8px' }}>
