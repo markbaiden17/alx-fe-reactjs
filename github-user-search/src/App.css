@@ -3,7 +3,8 @@ body {
     margin: 0;
     display: flex;
     justify-content: center;
-    background-color: antiquewhite;
+    background-color: white;
+    color: black;
 }
 
 #root {
@@ -15,7 +16,7 @@ body {
 
 nav {
     padding: 1rem;
-    background: white;
+    background: antiquewhite;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }

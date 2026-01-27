@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Search from './components/Search';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <hr />
 
       <Routes>
-        <Route path ="/" element ={<h1>Home Page</h1>} />
+        <Route path ="/" element={<Search />} />
         <Route path ="/about" element ={<h1>About Page</h1>} />
       </Routes>
 
