@@ -84,7 +84,7 @@ const Search = () => {
         )}
         {error && (
           <p className="text-center text-red-500 mt-6 font-medium">
-            Looks like we can't find the user.
+            Looks like we cant find the user
           </p>
         )}
       </div>
