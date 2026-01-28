@@ -1,44 +1,79 @@
-body {
-    font-family: system-ui, sans-serif;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    background-color: white;
-    color: black;
-}
-
-#root {
+html, body {
+    min-height: 100%;
     width: 100%;
-    max-width: 800px;
-    padding: 2rem;
-    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
 }
 
-nav {
-    padding: 1rem;
-    background: antiquewhite;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
 }
 
-nav a {
-    margin: 0 10px;
+.navbar {
+    background-color: #111827;
+    color: white;
+    padding: 1rem 0;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
     text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
 }
 
-nav a:hover {
-    text-decoration: underline;
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    transition: color 0.2s;
 }
 
-h1 {
-    color: #333;
-    margin-top: 2rem;
+.nav-links a:hover {
+    color: #60a5fa;
 }
 
-footer {
-    margin-top: 3rem;
-    color: #666;
+.main-content {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    display: block; 
+    overflow-y: auto;
+}
+
+.footer {
+    background-color: #111827;
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.footer p {
+    margin: 0;
+    opacity: 0.8;
     font-size: 0.9rem;
 }

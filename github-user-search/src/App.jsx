@@ -1,24 +1,35 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Search from './components/Search';
+import About from './components/About';
+import Results from './components/Results';
 
 function App() {
   return (
     <BrowserRouter>
-      <nav>
-        <Link to ="/">Home</Link> | <Link to ="/about">About</Link>
-      </nav>
+      <div className="app-container">
+        <nav className="navbar">
+          <div className="nav-content">
+            <Link to="/" className="logo">GitUS</Link>
+            <div className="nav-links">
+              <Link to="/">Home</Link>
+              <Link to="/about">About</Link>
+            </div>
+          </div>
+        </nav>
 
-      <hr />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Search />} />
+            <Route path="/results" element={<Results />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </main>
 
-      <Routes>
-        <Route path ="/" element={<Search />} />
-        <Route path ="/about" element ={<h1>About Page</h1>} />
-      </Routes>
-
-      <hr />
-
-      <footer>&copy; GitHub User Search</footer>
+        <footer className="footer">
+          <p>&copy; {new Date().getFullYear()} GitHub User Search</p>
+        </footer>
+      </div>
     </BrowserRouter>
   );
 }
