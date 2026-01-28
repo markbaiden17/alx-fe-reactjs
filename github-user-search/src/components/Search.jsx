@@ -3,7 +3,9 @@ import { fetchUserData } from "../services/githubService";
 
 const Search = () => {
     const [username, setUsername] = useState("");
-    const [userData, setUserData] = useState(null);
+    const [location, setLocation] = useState("");
+    const [minRepos, setMinRepos] = useState("");
+    const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
@@ -11,11 +13,12 @@ const Search = () => {
         e.preventDefault();
         setLoading(true);
         setError(false);
-        setUserData(null);
+        setUsers([]);
 
         try {
-            const data = await fetchUserData(username);
-            setUserData(data);
+            const data = await fetchUserData(username, location, minRepos);
+            setUsers(data.items || []);
+            if (data.items.length === 0) setError(true);
         } catch (err) {
             setError(true);
         } finally {
@@ -24,29 +27,43 @@ const Search = () => {
     };
 
     return (
-        <div style={{ marginTop: '20px' }}>
-            <form onSubmit={handleSearch}>
+        <div className="p-6 max-w-4xl mx-auto">
+            <form onSubmit={handleSearch} className="bg-white p-6 rounded-lg shadow-md flex flex-wrap gap-4 justify-center">
                 <input
-                    type="text"
-                    placeholder="Enter GitHub username..."
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    style={{ padding: '8px', width: '250px' }}
+                    type="text" placeholder="Username" 
+                    value={username} onChange={(e) => setUsername(e.target.value)}
+                    className="border p-2 rounded w-full md:w-auto"
                 />
-                <button type="submit" style={{ padding: '8px 15px', marginLeft: '10px' }}>Search</button>
+                <input 
+                    type="text" placeholder="Location" 
+                    value={location} onChange={(e) => setLocation(e.target.value)}
+                    className="border p-2 rounded w-full md:w-auto"
+                />
+                <input 
+                    type="number" placeholder="Min Repos" 
+                    value={minRepos} onChange={(e) => setMinRepos(e.target.value)}
+                    className="border p-2 rounded w-full md:w-auto"
+                />
+                <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Search</button>
             </form>
 
-            {loading && <p>Loading...</p>}
-            {error && <p>Looks like we cant find the user</p>}
+            {loading && <p className="text-center mt-4">Loading...</p>}
+            {error && <p className="text-red-500 text-center mt-4">Looks like we cant find the user</p>}
 
-            {userData && (
-                <div style={{ marginTop: '20px', border: '1px solid #ddd', padding: '20px', borderRadius: '8px' }}>
-                    <img src={userData.avatar_url} alt={userData.name} style={{ width: '100px', borderRadius: '50%' }} />
-                    <h2>{userData.name || userData.login}</h2>
-                    <p>{userData.bio}</p>
-                    <a href={userData.html_url} target="_blank" rel="noreferrer">View Profile</a>
-                </div>
-            )}    
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                {users.map((user) => (
+                    <div key={user.id} className="bg-white border p-4 rounded-lg shadow hover:shadow-lg transition">
+                        <img src={user.avatar_url} alt={user.login} className="w-20 h-20 rounded-full mx-auto" />
+                        <h2 className="text-xl font-bold text-center mt-2">{user.login}</h2>
+                        <p className="text-center text-gray-600">{user.location || "Location hidden"}</p>
+                        <div className="text-center mt-4">
+                            <a href={user.html_url} target="_blank" rel="noreferrer" className="text-blue-500 font-semibold">
+                                View Profile
+                            </a>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
