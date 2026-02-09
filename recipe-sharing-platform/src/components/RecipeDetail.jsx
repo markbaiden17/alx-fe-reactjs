@@ -41,20 +41,23 @@ const RecipeDetail = () => {
           <section className="bg-blue-50 p-6 rounded-lg shadow-inner">
             <h2 className="text-2xl font-semibold mb-4 text-blue-800">Ingredients</h2>
             <ul className="list-disc list-inside space-y-2 text-gray-700">
-              <li>Fresh ingredients based on {recipe.title}</li>
-              <li>Salt and pepper to taste</li>
-              <li>2 tablespoons of olive oil</li>
+              {/* Mapping through ingredients */}
+              {recipe.ingredients ? (
+                recipe.ingredients.map((ing, index) => (
+                  <li key={index}>{ing}</li>
+                ))
+              ) : (
+                <li>Ingredients for {recipe.title} coming soon!</li>
+              )}
             </ul>
           </section>
 
-          {/* Instructions Section */}
           <section className="bg-white p-6 border-l-4 border-blue-500 shadow-sm">
             <h2 className="text-2xl font-semibold mb-4 text-gray-800">Instructions</h2>
-            <ol className="list-decimal list-inside space-y-4 text-gray-700">
-              <li>Prepare your workspace and wash all vegetables.</li>
-              <li>Follow the traditional steps for {recipe.title}.</li>
-              <li>Serve hot and enjoy!</li>
-            </ol>
+            <div className="text-gray-700 leading-relaxed">
+                {/* Display instructions or a placeholder if not available */}
+              <p>{recipe.instructions || "Follow the standard preparation steps."}</p>
+            </div>
           </section>
         </div>
       </div>
