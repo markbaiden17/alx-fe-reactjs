@@ -1,42 +1,49 @@
 import { useState } from 'react';
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
-
+  // Individual state variables
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Basic Validation
-    if (!formData.username || !formData.email || !formData.password) {
+    if (!username || !email || !password) {
       setError('All fields are required!');
       return;
     }
     setError('');
-    console.log('Form Submitted (Controlled):', formData);
-    alert('Registration Successful!');
+    console.log('Controlled Form Data:', { username, email, password });
+    alert('Registration Successful (Manual)!');
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '300px' }}>
-      <h2>Manual Controlled Form</h2>
+    <div style={{ padding: '20px', border: '1px solid #ccc', marginBottom: '20px' }}>
+      <h2>Step 2: Controlled Form (Individual State)</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      
-      <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} />
-      <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
-      <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
-      
-      <button type="submit">Register</button>
-    </form>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <input 
+          type="text" 
+          placeholder="Username" 
+          value={username} 
+          onChange={(e) => setUsername(e.target.value)} 
+        />
+        <input 
+          type="email" 
+          placeholder="Email" 
+          value={email} 
+          onChange={(e) => setEmail(e.target.value)} 
+        />
+        <input 
+          type="password" 
+          placeholder="Password" 
+          value={password} 
+          onChange={(e) => setPassword(e.target.value)} 
+        />
+        <button type="submit">Register</button>
+      </form>
+    </div>
   );
 };
 
