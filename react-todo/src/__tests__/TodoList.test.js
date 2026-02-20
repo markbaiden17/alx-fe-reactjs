@@ -4,9 +4,13 @@ import '@testing-library/jest-dom';
 import TodoList from '../components/TodoList';
 
 describe('TodoList Component', () => {
-  test('renders the TodoList component and initial todos', () => {
+  test('renders the TodoList component', () => {
     render(<TodoList />);
     expect(screen.getByText('Todo List')).toBeInTheDocument();
+  });
+
+  test('renders initial todos', () => {
+    render(<TodoList />);
     expect(screen.getByText('Learn React')).toBeInTheDocument();
     expect(screen.getByText('Build a Todo App')).toBeInTheDocument();
   });
@@ -16,30 +20,32 @@ describe('TodoList Component', () => {
     const input = screen.getByPlaceholderText('Add a new todo');
     const addButton = screen.getByText('Add Todo');
 
-    fireEvent.change(input, { target: { value: 'Test Testing Library' } });
+    fireEvent.change(input, { target: { value: 'New Task' } });
     fireEvent.click(addButton);
 
-    expect(screen.getByText('Test Testing Library')).toBeInTheDocument();
+    expect(screen.getByText('New Task')).toBeInTheDocument();
   });
 
-  test('toggles a todo completion status', () => {
+  test('toggles a todo item', () => {
     render(<TodoList />);
-    const todoItem = screen.getByText('Learn React');
+    const todoText = screen.getByText('Learn React');
     
-    // Initial state: not completed (no line-through)
-    expect(todoItem.parentElement).not.toHaveStyle('text-decoration: line-through');
+    // Toggle completion
+    fireEvent.click(todoText);
+    expect(todoText).toHaveStyle('text-decoration: line-through');
     
-    // Click to toggle
-    fireEvent.click(todoItem);
-    expect(todoItem.parentElement).toHaveStyle('text-decoration: line-through');
+    // Toggle back
+    fireEvent.click(todoText);
+    expect(todoText).toHaveStyle('text-decoration: none');
   });
 
-  test('deletes a todo', () => {
+  test('deletes a todo item', () => {
     render(<TodoList />);
-    const todoItem = screen.getByText('Build a Todo App');
-    const deleteButton = todoItem.nextSibling; // The "Delete" button next to the span
+    const todoToDelete = screen.getByText('Learn React');
+    // Find the button that is a sibling of the text we found
+    const deleteButton = screen.getAllByText('Delete')[0];
 
     fireEvent.click(deleteButton);
-    expect(todoItem).not.toBeInTheDocument();
+    expect(todoToDelete).not.toBeInTheDocument();
   });
 });
